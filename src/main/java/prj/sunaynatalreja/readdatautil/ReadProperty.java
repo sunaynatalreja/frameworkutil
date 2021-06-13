@@ -1,7 +1,7 @@
 /**
  * 
  */
-package prj.sunaynatalreja.extentreportutil.readdatautil;
+package prj.sunaynatalreja.readdatautil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
