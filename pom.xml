@@ -7,7 +7,7 @@
 
 	<groupId>prj.sunaynatalreja.frameworkutil</groupId>
 	<artifactId>frameworkutil</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<name>frameworkutil</name>
 	<!-- FIXME change it to the project's website -->
@@ -24,6 +24,7 @@
 		<java-client.version>7.4.1</java-client.version>
 		<log4j.version>1.2.17</log4j.version>
 		<testng.version>7.3.0</testng.version>
+		<poi-ooxml.version>4.1.2</poi-ooxml.version>
 	</properties>
 
 
@@ -63,6 +64,11 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-ooxml.version}</version>
 		</dependency>
 	</dependencies>
 
