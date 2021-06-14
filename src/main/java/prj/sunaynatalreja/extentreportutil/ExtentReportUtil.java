@@ -3,6 +3,8 @@
  */
 package prj.sunaynatalreja.extentreportutil;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -14,18 +16,33 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 
 
+
 /**
  * @author Sunayna Talreja
  * This class is created to provide a basic configuration
  * of the extent report. 
 */
 public class ExtentReportUtil { 
-	static ExtentReports reports ;
-	static ExtentTest test; 
-	static ExtentHtmlReporter htmlReporter;
-
-public static void createReport(String path,String docTitle, String reportName) {
-	reports = new ExtentReports(); 
+	ExtentReports reports ;
+	ExtentTest test; 
+	ExtentHtmlReporter htmlReporter;
+	static ExtentReportUtil extentReportUtilInstance;
+	
+	private ExtentReportUtil()
+    {
+    	reports = new ExtentReports(); 
+    }
+  
+    // static method to create instance of Singleton class
+    public static ExtentReportUtil getInstance()
+    {
+        if (extentReportUtilInstance == null)
+        	extentReportUtilInstance = new ExtentReportUtil();
+  
+        return extentReportUtilInstance;
+    }	
+	
+public void createReport(String path,String docTitle, String reportName) {
 	htmlReporter = new ExtentHtmlReporter(path);
     htmlReporter.config().setDocumentTitle(docTitle); // Tile of report
     htmlReporter.config().setReportName(reportName); // Name of the report
@@ -33,20 +50,20 @@ public static void createReport(String path,String docTitle, String reportName) 
     reports.attachReporter(htmlReporter);
 }
 
-public static void reportExtentTestStart(String testName)
+public void reportExtentTestStart(String testName)
 {
 
     test = reports.createTest(testName);
 }
 
-public static void reportExtentEnd()
+public void reportExtentEnd()
 {
 
     reports.flush();
 
 }
 
-public static void setReportExtentTestDetails(String status,String testData,String testName)
+public void setReportExtentTestDetails(String status,String testData,String testName)
 {
     String details="TestData: "+testData;
 

@@ -12,10 +12,23 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
+
 /**
  * @author Sunayna Talreja
  */
 public class BrowserElementActions {
+	
+static BrowserElementActions browserElementActions;
+	
+	
+	public static BrowserElementActions getInstance()
+    {
+        if (browserElementActions == null)
+        	browserElementActions = new BrowserElementActions();
+  
+        return browserElementActions;
+    }	
 	
 	
 	
@@ -24,7 +37,7 @@ public class BrowserElementActions {
 	 * @param element
 	 * @return
 	 */
-	public static boolean waitForElement(WebDriver driver, WebElement element)
+	public  boolean waitForElement(WebDriver driver, WebElement element)
 	{
 		boolean statusOfElementToBeReturned=false;
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -42,7 +55,7 @@ public class BrowserElementActions {
 	 * @param elementDescription
 	 * @throws Exception
 	 */
-	public static void clickOnElement(WebDriver driver,WebElement element,String elementDescription) throws Exception
+	public  void clickOnElement(WebDriver driver,WebElement element,String elementDescription) throws Exception
 	{
 		try {
 			if (!waitForElement(driver, element))  
@@ -61,7 +74,7 @@ public class BrowserElementActions {
 	 * @param elementDescription
 	 * @throws Exception
 	 */
-	public static void typeOnElement(WebDriver driver,WebElement element,String txtToSend, String elementDescription) throws Exception
+	public  void typeOnElement(WebDriver driver,WebElement element,String txtToSend, String elementDescription) throws Exception
 	{
 		try {
 			if (!waitForElement(driver, element))  
@@ -77,7 +90,7 @@ public class BrowserElementActions {
 	/**
 	 * @param driver
 	 */
-	public static void waitForPageLoad(WebDriver driver) {
+	public  void waitForPageLoad(WebDriver driver) {
 		WebDriverWait wait=new WebDriverWait(driver, 10);
 		wait.until(new ExpectedCondition<Boolean>() {
 	        public Boolean apply(WebDriver driver) {
@@ -94,7 +107,7 @@ public class BrowserElementActions {
 	 * @param description
 	 * @throws Exception
 	 */
-	public static void mouseHoverAction(WebElement element, WebDriver driver, String description) throws Exception {
+	public  void mouseHoverAction(WebElement element, WebDriver driver, String description) throws Exception {
 		Actions act=new Actions(driver);
 		try {
 			if (!waitForElement(driver, element))  

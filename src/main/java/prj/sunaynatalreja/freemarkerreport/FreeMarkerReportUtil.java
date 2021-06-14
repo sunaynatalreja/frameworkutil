@@ -10,12 +10,16 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.aventstack.extentreports.ExtentReports;
+
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateNotFoundException;
 import freemarker.template.Version;
+import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 
 /**
  * @author Sunayna Talreja
@@ -35,7 +39,20 @@ public class FreeMarkerReportUtil {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public static void HTMLReport(List reportData,String templateName,String outputfile) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException
+	
+ static FreeMarkerReportUtil freemarkerReportUtilInstance;
+	
+
+  
+    //  method to create instance of Singleton class
+    public static FreeMarkerReportUtil getInstance()
+    {
+        if (freemarkerReportUtilInstance == null)
+        	freemarkerReportUtilInstance = new FreeMarkerReportUtil();
+  
+        return freemarkerReportUtilInstance;
+    }	
+	public void HTMLReport(List reportData,String templateName,String outputfile) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException
 	{
 	
 	Configuration cfg = new Configuration(new Version("2.3.23"));

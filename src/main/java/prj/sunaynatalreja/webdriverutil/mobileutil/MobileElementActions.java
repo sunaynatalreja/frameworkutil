@@ -3,9 +3,10 @@
  */
 package prj.sunaynatalreja.webdriverutil.mobileutil;
 
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
+import static  io.appium.java_client.touch.LongPressOptions.*;
+import static  io.appium.java_client.touch.TapOptions.*;
+import static  io.appium.java_client.touch.offset.ElementOption.*;
+import prj.sunaynatalreja.webdriverutil.browserutil.BrowserElementActions;
 
 import java.time.Duration;
 
@@ -33,7 +34,19 @@ public class MobileElementActions {
 	 * @param elementDescription
 	 * @throws Exception
 	 */
-	public static void longPressMobileElement(WebDriver driver,WebElement element,String elementDescription) throws Exception
+	
+static MobileElementActions mobileElementActions;
+	
+	
+	public static MobileElementActions getInstance()
+    {
+        if (mobileElementActions == null)
+        	mobileElementActions = new MobileElementActions();
+  
+        return mobileElementActions;
+    }	
+	
+	public  void longPressMobileElement(WebDriver driver,WebElement element,String elementDescription) throws Exception
 	{
 		TouchAction touch=new TouchAction((MobileDriver) driver);
 		try {
@@ -51,7 +64,7 @@ public class MobileElementActions {
 	 * @param elementDescription
 	 * @throws Exception
 	 */
-	public static void mobileTap(WebDriver driver,WebElement element,String elementDescription) throws Exception
+	public  void mobileTap(WebDriver driver,WebElement element,String elementDescription) throws Exception
 	{
 		TouchAction touch=new TouchAction((MobileDriver) driver);
 		try {
@@ -70,7 +83,7 @@ public class MobileElementActions {
 	 * @param elementDescription
 	 * @throws Exception
 	 */
-	public static void mobileSlider(WebDriver driver,WebElement orignalElement,WebElement destElement, String elementDescription) throws Exception
+	public  void mobileSlider(WebDriver driver,WebElement orignalElement,WebElement destElement, String elementDescription) throws Exception
 	{
 		TouchAction touch=new TouchAction((MobileDriver) driver);
 		try {
@@ -87,7 +100,7 @@ public class MobileElementActions {
 	 * @param element
 	 * @return
 	 */
-	public static boolean waitForElement(WebDriver driver, WebElement element)
+	public  boolean waitForElement(WebDriver driver, WebElement element)
 	{
 		boolean statusOfElementToBeReturned=false;
 		WebDriverWait wait = new WebDriverWait(driver, 10);

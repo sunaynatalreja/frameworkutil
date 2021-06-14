@@ -16,18 +16,24 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.aventstack.extentreports.ExtentReports;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 
 /**
  * @author Sunayna Talreja
  */
 public class WebDriverFactory {
 
-	static WebDriver driver=null;
-	static DesiredCapabilities capabilities ;
-
+	
+	
+	WebDriver driver=null;
+	DesiredCapabilities capabilities ;
+	private WebDriverFactory webDriverFactory;
+		
 	/**
 	 * @author Sunayna Talreja
 	 * This method is used to initialize the driver with required parameters
@@ -38,7 +44,7 @@ public class WebDriverFactory {
 	 * @return WebDriver instance of the browser provided
 	 * @throws MalformedURLException
 	 */
-	public static synchronized WebDriver get(String browser,String hubUrl, String device, String appPath) throws MalformedURLException 
+	public synchronized WebDriver get(String browser,String hubUrl, String device, String appPath) throws MalformedURLException 
 	{
 	
 

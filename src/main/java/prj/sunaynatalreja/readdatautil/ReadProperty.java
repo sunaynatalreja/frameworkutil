@@ -8,18 +8,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.aventstack.extentreports.ExtentReports;
+
+import prj.sunaynatalreja.webdriverutil.browserutil.BrowserElementActions;
+
 /**
  * @author Sunayna Talreja
 */
 public class ReadProperty {
 	
-static Properties prop=new Properties();
-	
-/*
+private static ReadProperty readProperty = null;
+static Properties prop;
+
+private ReadProperty()
+{
+	prop =new Properties();
+}
+
+public static ReadProperty getInstance()
+{
+    if (readProperty == null)
+    	readProperty = new ReadProperty();
+
+    return readProperty;
+}	
+
+
+
+/**
  * Reads property from config.properties file
  * 
  */
-	public static String getProperty(String key,String filename) throws IOException
+	public String getProperty(String key,String filename) throws IOException
 	{
 		
 		InputStream fis=ReadProperty.class.getClassLoader().getResourceAsStream(filename);

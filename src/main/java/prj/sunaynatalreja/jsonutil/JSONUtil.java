@@ -4,9 +4,23 @@ import static com.jayway.restassured.RestAssured.given;
 import java.util.Map;
 import org.testng.Assert;
 import com.jayway.restassured.response.Response;
+
+import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 import prj.sunaynatalreja.logutil.Log;
 
 public class JSONUtil {
+	
+	private static JSONUtil jsonutilinstance;
+	
+	public static JSONUtil getInstance()
+    {
+        if (jsonutilinstance == null)
+        	jsonutilinstance = new JSONUtil();
+  
+        return jsonutilinstance;
+    }	
+	
+	
 	
 	/**
 	 * Json Get Request With Path Parameter
@@ -14,7 +28,7 @@ public class JSONUtil {
 	 * @param data
 	 * @return
 	 */
-	public static String jsonGetPathParameter(String Url,Map<String,String> data)  {
+	public String jsonGetPathParameter(String Url,Map<String,String> data)  {
 		Response response =given().pathParams(data).when().get(Url);
 		if(response.getStatusCode()>399)
 		{
@@ -34,7 +48,7 @@ public class JSONUtil {
 	 * @param data
 	 * @return
 	 */
-	public static Response jsonGetQueryParams(Map<String,String> param,String Url)  {
+	public Response jsonGetQueryParams(Map<String,String> param,String Url)  {
 		// Creating object for JSON request
 		Response response =given().queryParams(param).when().get(Url);
 		if(response.getStatusCode()>399)
@@ -51,7 +65,7 @@ public class JSONUtil {
 	 * @param url
 	 * @return
 	 */
-	public static String jsonPut(String testData, String url) {
+	public String jsonPut(String testData, String url) {
 		Response response = given().header("Content-Type", "application/json").body(testData)
 				.relaxedHTTPSValidation().request().put(url);
 		if(response.getStatusCode()>399)
@@ -74,7 +88,7 @@ public class JSONUtil {
 	 * @param url
 	 * @return
 	 */
-	public static String jsonPost(String testData, String url) {
+	public String jsonPost(String testData, String url) {
 
 		
 		Response response = given().header("Content-Type", "application/json").body(testData)
@@ -98,7 +112,7 @@ public class JSONUtil {
 	 * @param url
 	 * @return
 	 */
-	public static Response jsonDeleteWithPathParams(Map<String,String> pathParams,String url) {
+	public Response jsonDeleteWithPathParams(Map<String,String> pathParams,String url) {
 		Response response =given().pathParams(pathParams).when().delete(url);
 		if(response.getStatusCode()>399)
 		{
