@@ -18,7 +18,7 @@ import prj.sunaynatalreja.webdriverutil.browserutil.BrowserElementActions;
 public class ReadProperty {
 	
 private static ReadProperty readProperty = null;
-static Properties prop;
+private static Properties prop;
 
 private ReadProperty()
 {

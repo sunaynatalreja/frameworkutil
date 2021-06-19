@@ -12,6 +12,10 @@ public class JSONUtil {
 	
 	private static JSONUtil jsonutilinstance;
 	
+	private JSONUtil()
+	{
+		
+	}
 	public static JSONUtil getInstance()
     {
         if (jsonutilinstance == null)

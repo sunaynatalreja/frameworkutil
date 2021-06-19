@@ -3,8 +3,6 @@
  */
 package prj.sunaynatalreja.extentreportutil;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -26,7 +24,7 @@ public class ExtentReportUtil {
 	ExtentReports reports ;
 	ExtentTest test; 
 	ExtentHtmlReporter htmlReporter;
-	static ExtentReportUtil extentReportUtilInstance;
+	private static ExtentReportUtil extentReportUtilInstance;
 
 	private ExtentReportUtil()
 	{

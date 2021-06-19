@@ -35,8 +35,9 @@ public class MobileElementActions {
 	 * @throws Exception
 	 */
 	
-static MobileElementActions mobileElementActions;
-	
+private static MobileElementActions mobileElementActions;
+private MobileElementActions()
+{}
 	
 	public static MobileElementActions getInstance()
     {

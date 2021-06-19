@@ -19,8 +19,10 @@ import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
  */
 public class BrowserElementActions {
 
-	static BrowserElementActions browserElementActions;
+	private static BrowserElementActions browserElementActions;
 
+	private BrowserElementActions()
+	{}
 
 	public static BrowserElementActions getInstance()
 	{

@@ -11,19 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aventstack.extentreports.ExtentReports;
-
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateNotFoundException;
 import freemarker.template.Version;
-import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 
 /**
  * @author Sunayna Talreja
-*/
+ */
 public class FreeMarkerReportUtil {
 
 	/**
@@ -39,21 +36,25 @@ public class FreeMarkerReportUtil {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	
- static FreeMarkerReportUtil freemarkerReportUtilInstance;
-	
 
-  
-    //  method to create instance of Singleton class
-    public static FreeMarkerReportUtil getInstance()
-    {
-        if (freemarkerReportUtilInstance == null)
-        	freemarkerReportUtilInstance = new FreeMarkerReportUtil();
-  
-        return freemarkerReportUtilInstance;
-    }	
-    
-    
+	private static FreeMarkerReportUtil freemarkerReportUtilInstance;
+
+	private FreeMarkerReportUtil()
+	{
+
+	}
+
+
+	//  method to create instance of Singleton class
+	public static FreeMarkerReportUtil getInstance()
+	{
+		if (freemarkerReportUtilInstance == null)
+			freemarkerReportUtilInstance = new FreeMarkerReportUtil();
+
+		return freemarkerReportUtilInstance;
+	}	
+
+
 	/**
 	 * Creating freemarker report
 	 * @param reportData
@@ -64,23 +65,24 @@ public class FreeMarkerReportUtil {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("rawtypes")
 	public void createHTMLReport(List reportData,String templateName,String outputfile) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException
 	{
-	Configuration cfg = new Configuration(new Version("2.3.23"));
-    cfg.setClassForTemplateLoading(FreeMarkerReportUtil.class, "/");
-    cfg.setDefaultEncoding("UTF-8");
-    Template template = cfg.getTemplate(templateName);
-    Map<String, Object> reportHelperTemplate = new HashMap<>();
-    reportHelperTemplate.put("reportHelper", reportData);
-    Writer fileWriter = new FileWriter(new File(outputfile));
-    try {
-        template.process(reportHelperTemplate, fileWriter);
-    } catch (Exception e) {
-		e.printStackTrace();
+		Configuration cfg = new Configuration(new Version("2.3.23"));
+		cfg.setClassForTemplateLoading(FreeMarkerReportUtil.class, "/");
+		cfg.setDefaultEncoding("UTF-8");
+		Template template = cfg.getTemplate(templateName);
+		Map<String, Object> reportHelperTemplate = new HashMap<>();
+		reportHelperTemplate.put("reportHelper", reportData);
+		Writer fileWriter = new FileWriter(new File(outputfile));
+		try {
+			template.process(reportHelperTemplate, fileWriter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally
+		{
+			fileWriter.close();
+		}
 	}
-    finally
-    {
-    	fileWriter.close();
-    }
-}
 }
