@@ -28,12 +28,12 @@ import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
  */
 public class WebDriverFactory {
 
-	
-	
+
+
 	WebDriver driver=null;
 	DesiredCapabilities capabilities ;
 	private WebDriverFactory webDriverFactory;
-		
+
 	/**
 	 * @author Sunayna Talreja
 	 * This method is used to initialize the driver with required parameters
@@ -44,35 +44,30 @@ public class WebDriverFactory {
 	 * @return WebDriver instance of the browser provided
 	 * @throws MalformedURLException
 	 */
-	public synchronized WebDriver get(String browser,String hubUrl, String device, String appPath) throws MalformedURLException 
+	public synchronized WebDriver getDriver(String browser,String hubUrl, String device, String appPath) throws MalformedURLException 
 	{
-	
 
+		setCapabilities(browser,device,appPath);
+		driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
+		driver.manage().window().maximize();
+		return driver;
+	}
 
-		if ("chrome".equalsIgnoreCase(browser)) {
+	private void setCapabilities(String browser,String device, String appPath) throws MalformedURLException
+	{
+		switch(browser) {
+		case "chrome":
 			capabilities=DesiredCapabilities.chrome();
-			driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
-			driver.manage().window().maximize();
-
-
-		}
-		else if ("firefox".equalsIgnoreCase(browser))
-		{
+			break;
+		case "firefox":
 			capabilities=DesiredCapabilities.firefox();
-			driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
-			driver.manage().window().maximize();
-		}
-		else if ("internetexplorer".equalsIgnoreCase(browser))
-		{
+			break;
+		case "internetexplorer":
 			capabilities=DesiredCapabilities.internetExplorer();
 			capabilities.setCapability("ignoreZoomSetting", true);
 			capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-
-			driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
-			driver.manage().window().maximize();
-		}
-		else if ("android".equalsIgnoreCase(browser))
-		{
+			break;
+		case "android":
 			capabilities=new DesiredCapabilities();
 			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
 			capabilities.setCapability(MobileCapabilityType.APP, appPath);
@@ -81,16 +76,13 @@ public class WebDriverFactory {
 			capabilities.setCapability("autoDismissAlerts", true);
 			capabilities.setCapability("autoGrantPermissions", "true");
 			capabilities.setCapability("fullReset", true);
-			driver=new AndroidDriver(new URL(hubUrl),capabilities);
-			//driver.switchTo().alert().accept();
-		}
-		else if ("edge".equalsIgnoreCase(browser))
-		{
+			break;
+		case "edge":
 			capabilities=DesiredCapabilities.edge();
-			driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
-			driver.manage().window().maximize();
+			break;			
 		}
-		return driver;
+
+
 	}
 
 }

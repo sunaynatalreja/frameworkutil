@@ -31,17 +31,13 @@ public static ReadProperty getInstance()
     	readProperty = new ReadProperty();
 
     return readProperty;
-}	
-
-
-
+}
 /**
  * Reads property from config.properties file
  * 
  */
 	public String getProperty(String key,String filename) throws IOException
 	{
-		
 		InputStream fis=ReadProperty.class.getClassLoader().getResourceAsStream(filename);
 		prop.load(fis);
 		return prop.getProperty(key);

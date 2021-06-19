@@ -52,31 +52,30 @@ public class FreeMarkerReportUtil {
   
         return freemarkerReportUtilInstance;
     }	
-	public void HTMLReport(List reportData,String templateName,String outputfile) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException
+    
+    
+	/**
+	 * Creating freemarker report
+	 * @param reportData
+	 * @param templateName
+	 * @param outputfile
+	 * @throws TemplateNotFoundException
+	 * @throws MalformedTemplateNameException
+	 * @throws ParseException
+	 * @throws IOException
+	 */
+	public void createHTMLReport(List reportData,String templateName,String outputfile) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException
 	{
-	
 	Configuration cfg = new Configuration(new Version("2.3.23"));
-
     cfg.setClassForTemplateLoading(FreeMarkerReportUtil.class, "/");
     cfg.setDefaultEncoding("UTF-8");
-
     Template template = cfg.getTemplate(templateName);
-
     Map<String, Object> reportHelperTemplate = new HashMap<>();
-
-        
-
     reportHelperTemplate.put("reportHelper", reportData);
-
     Writer fileWriter = new FileWriter(new File(outputfile));
     try {
-
         template.process(reportHelperTemplate, fileWriter);
-      
-
-        
     } catch (Exception e) {
-		
 		e.printStackTrace();
 	}
     finally
@@ -84,5 +83,4 @@ public class FreeMarkerReportUtil {
     	fileWriter.close();
     }
 }
-	
 }

@@ -18,20 +18,20 @@ import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
  * @author Sunayna Talreja
  */
 public class BrowserElementActions {
-	
-static BrowserElementActions browserElementActions;
-	
-	
+
+	static BrowserElementActions browserElementActions;
+
+
 	public static BrowserElementActions getInstance()
-    {
-        if (browserElementActions == null)
-        	browserElementActions = new BrowserElementActions();
-  
-        return browserElementActions;
-    }	
-	
-	
-	
+	{
+		if (browserElementActions == null)
+			browserElementActions = new BrowserElementActions();
+
+		return browserElementActions;
+	}	
+
+
+
 	/**
 	 * @param driver
 	 * @param element
@@ -86,28 +86,28 @@ static BrowserElementActions browserElementActions;
 		}
 	}
 
-	
+
 	/**
 	 * @param driver
 	 */
 	public  void waitForPageLoad(WebDriver driver) {
 		WebDriverWait wait=new WebDriverWait(driver, 10);
 		wait.until(new ExpectedCondition<Boolean>() {
-	        public Boolean apply(WebDriver driver) {
-	            return ((JavascriptExecutor) driver).executeScript(
-	                "return document.readyState"
-	            ).equals("complete");}});
-		
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor) driver).executeScript(
+						"return document.readyState"
+						).equals("complete");}});
+
 	}
 
-	
+
 	/**
 	 * @param element
 	 * @param driver
 	 * @param description
 	 * @throws Exception
 	 */
-	public  void mouseHoverAction(WebElement element, WebDriver driver, String description) throws Exception {
+	public void mouseHoverAction(WebElement element, WebDriver driver, String description) throws Exception {
 		Actions act=new Actions(driver);
 		try {
 			if (!waitForElement(driver, element))  
@@ -117,7 +117,7 @@ static BrowserElementActions browserElementActions;
 		} catch (NoSuchElementException e) {
 			throw new Exception(description + " not found in page!!");
 		}
-		
+
 	}
 
 }

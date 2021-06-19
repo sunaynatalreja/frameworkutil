@@ -16,46 +16,41 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * @author Sunayna Talreja
-*/
+ */
 public class ReadExcelData {
-	
+
+	/**
+	 * Returns shee
+	 * @param file
+	 * @param workbook
+	 * @param sheetName
+	 * @return sheet
+	 * @throws IOException
+	 */
 	public XSSFSheet getSheet(String file,String workbook,String sheetName) throws IOException
-	{
-		/*
-		 * Takes input parameter 
-		 * as workbook name and sheet name 
-		 * and fetches and returns sheet 
-		 * 
-		 */
+	{		
 		XSSFSheet sheet=null;
-		
-		  workbook=ReadExcelData.class.getClassLoader().getResource("TestData.xlsx").getPath();
-		  workbook=workbook.replace("\\", File.separator);
-		 
-		
+		workbook=ReadExcelData.class.getClassLoader().getResource("TestData.xlsx").getPath();
+		workbook=workbook.replace("\\", File.separator);
 		FileInputStream fis=new FileInputStream(workbook);
-		
 		XSSFWorkbook wb=new XSSFWorkbook(fis);
 		sheet=wb.getSheet(sheetName);
 		return sheet;
 	}
 
 	/**
+	 * Returns headers of the excel sheet
 	 * @param sheet
 	 * @return
 	 */
 	public ArrayList<String> getHeaders(XSSFSheet sheet) {
-		/*
-		 * From the excel sheet
-		 * fetches the header details
-		 */
 		ArrayList<String> listOfHeaders=new ArrayList<>();
 		int columnCount=sheet.getRow(0).getPhysicalNumberOfCells();
 		for(int i=0;i<columnCount;i++)
 		{
 			listOfHeaders.add(sheet.getRow(0).getCell(i).getStringCellValue());
 		}
-		
+
 		return listOfHeaders;
 	}
 

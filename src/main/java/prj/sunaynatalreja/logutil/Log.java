@@ -33,7 +33,7 @@ public class Log {
 		/**
 		 * @param description provide DEBUG Log Description
 		 */
-		public static void messageDebug(String description) {
+		public static void setMessageDebug(String description) {
 
 			Reporter.log( description );
 			
@@ -41,14 +41,14 @@ public class Log {
 
 		}
 		
-		public static void messageInfo(String description) {
+		public static void setMessageInfo(String description) {
 
 			Reporter.log( description );
 			
 			lsLog4j().log(callerClass(), Level.INFO, description, null);
 
 		}
-		public static void messageWarn(String description) {
+		public static void setMessageWarn(String description) {
 
 			Reporter.log( description );
 			
@@ -56,7 +56,7 @@ public class Log {
 
 		}
 		
-		public static void messageError(String description) {
+		public static void setMessageError(String description) {
 
 			Reporter.log( description );
 			
@@ -64,7 +64,7 @@ public class Log {
 
 		}
 		
-		public static void messageFatal(String description) {
+		public static void setMessageFatal(String description) {
 
 			Reporter.log( description );
 			

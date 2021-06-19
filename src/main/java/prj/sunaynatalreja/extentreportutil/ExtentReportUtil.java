@@ -21,63 +21,79 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
  * @author Sunayna Talreja
  * This class is created to provide a basic configuration
  * of the extent report. 
-*/
+ */
 public class ExtentReportUtil { 
 	ExtentReports reports ;
 	ExtentTest test; 
 	ExtentHtmlReporter htmlReporter;
 	static ExtentReportUtil extentReportUtilInstance;
-	
+
 	private ExtentReportUtil()
-    {
-    	reports = new ExtentReports(); 
-    }
-  
-    // static method to create instance of Singleton class
-    public static ExtentReportUtil getInstance()
-    {
-        if (extentReportUtilInstance == null)
-        	extentReportUtilInstance = new ExtentReportUtil();
-  
-        return extentReportUtilInstance;
-    }	
+	{
+		reports = new ExtentReports(); 
+	}
+
+	// static method to create instance of Singleton class
+	public static ExtentReportUtil getInstance()
+	{
+		if (extentReportUtilInstance == null)
+			extentReportUtilInstance = new ExtentReportUtil();
+
+		return extentReportUtilInstance;
+	}	
 	
-public void createReport(String path,String docTitle, String reportName) {
-	htmlReporter = new ExtentHtmlReporter(path);
-    htmlReporter.config().setDocumentTitle(docTitle); // Tile of report
-    htmlReporter.config().setReportName(reportName); // Name of the report
-    htmlReporter.config().setTheme(Theme.DARK);
-    reports.attachReporter(htmlReporter);
-}
 
-public void reportExtentTestStart(String testName)
-{
+	/**
+	 * Creating extent report
+	 * @param pathToCreateReport
+	 * @param docTitle
+	 * @param reportName
+	 */
+	public void createReport(String pathToCreateReport,String docTitle, String reportName) {
+		htmlReporter = new ExtentHtmlReporter(pathToCreateReport);
+		htmlReporter.config().setDocumentTitle(docTitle); // Tile of report
+		htmlReporter.config().setReportName(reportName); // Name of the report
+		htmlReporter.config().setTheme(Theme.DARK);
+		reports.attachReporter(htmlReporter);
+	}
 
-    test = reports.createTest(testName);
-}
+	
+	/**
+	 * Creating extent test
+	 * @param testName
+	 */
+	public void createReportExtentTest(String testName)
+	{
+		test = reports.createTest(testName);
+	}
 
-public void reportExtentEnd()
-{
+	/**
+	 * Ending Extent Report
+	 */
+	public void endReportExtent()
+	{
+		reports.flush();
+	}
 
-    reports.flush();
-
-}
-
-public void setReportExtentTestDetails(String status,String testData,String testName)
-{
-    String details="TestData: "+testData;
-
-    if(status=="PASS") {
-       test.log(Status.PASS, MarkupHelper.createLabel(testName + " PASSED ", ExtentColor.GREEN));
-        test.pass(details);
-    }else if(status=="FAIL") {
-        test.log(Status.FAIL, MarkupHelper.createLabel(testName+" FAILED ", ExtentColor.RED));
-        test.fail(details);
-    }else if(status=="SKIP") {
-        test.log(Status.SKIP, MarkupHelper.createLabel(testName + " SKIPPED ", ExtentColor.ORANGE));
-        test.skip(details);
-    }
-
-
-}
+	
+	/**
+	 * Setting extent report test details
+	 * @param status
+	 * @param testData
+	 * @param testName
+	 */
+	public void setReportExtentTestDetails(String status,String testData,String testName)
+	{
+		String details="TestData: "+testData;
+		if(status=="PASS") {
+			test.log(Status.PASS, MarkupHelper.createLabel(testName + " PASSED ", ExtentColor.GREEN));
+			test.pass(details);
+		}else if(status=="FAIL") {
+			test.log(Status.FAIL, MarkupHelper.createLabel(testName+" FAILED ", ExtentColor.RED));
+			test.fail(details);
+		}else if(status=="SKIP") {
+			test.log(Status.SKIP, MarkupHelper.createLabel(testName + " SKIPPED ", ExtentColor.ORANGE));
+			test.skip(details);
+		}
+	}
 }
