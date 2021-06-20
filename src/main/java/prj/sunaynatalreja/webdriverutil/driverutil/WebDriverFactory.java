@@ -57,32 +57,69 @@ public class WebDriverFactory {
 	{
 		switch(browser) {
 		case "chrome":
-			capabilities=DesiredCapabilities.chrome();
+			setChromeCapabilities();
 			break;
 		case "firefox":
-			capabilities=DesiredCapabilities.firefox();
+			setFirefoxCapabilities();
 			break;
 		case "internetexplorer":
-			capabilities=DesiredCapabilities.internetExplorer();
-			capabilities.setCapability("ignoreZoomSetting", true);
-			capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+			setInternetExplorerCapabilities();
 			break;
 		case "android":
-			capabilities=new DesiredCapabilities();
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
-			capabilities.setCapability(MobileCapabilityType.APP, appPath);
-			capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
-			capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-			capabilities.setCapability("autoDismissAlerts", true);
-			capabilities.setCapability("autoGrantPermissions", "true");
-			capabilities.setCapability("fullReset", true);
+			setAndroidDeviceCapabilities(device, appPath);
 			break;
 		case "edge":
-			capabilities=DesiredCapabilities.edge();
+			setEdgeCapabilities();
 			break;			
 		}
 
 
+	}
+
+	/**
+	 * Edge Browser Capabilities
+	 */
+	private void setEdgeCapabilities() {
+		capabilities=DesiredCapabilities.edge();
+	}
+
+	/**
+	 * Android device capabilities
+	 * @param device
+	 * @param appPath
+	 */
+	private void setAndroidDeviceCapabilities(String device, String appPath) {
+		capabilities=new DesiredCapabilities();
+		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
+		capabilities.setCapability(MobileCapabilityType.APP, appPath);
+		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+		capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+		capabilities.setCapability("autoDismissAlerts", true);
+		capabilities.setCapability("autoGrantPermissions", "true");
+		capabilities.setCapability("fullReset", true);
+	}
+
+	/**
+	 * Internet Explorer Capabilities
+	 */
+	private void setInternetExplorerCapabilities() {
+		capabilities=DesiredCapabilities.internetExplorer();
+		capabilities.setCapability("ignoreZoomSetting", true);
+		capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+	}
+
+	/**
+	 * Firefox Capabilities
+	 */
+	private void setFirefoxCapabilities() {
+		capabilities=DesiredCapabilities.firefox();
+	}
+
+	/**
+	 * Chrome Capabilities
+	 */
+	private void setChromeCapabilities() {
+		capabilities=DesiredCapabilities.chrome();
 	}
 
 }
