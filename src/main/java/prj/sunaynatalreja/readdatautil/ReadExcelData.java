@@ -19,6 +19,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ReadExcelData {
 
+	XSSFSheet sheet;
+	FileInputStream fis;
+	XSSFWorkbook wb;
+	
 	/**
 	 * Returns shee
 	 * @param file
@@ -29,11 +33,11 @@ public class ReadExcelData {
 	 */
 	public XSSFSheet getSheet(String file,String workbook,String sheetName) throws IOException
 	{		
-		XSSFSheet sheet=null;
+		
 		workbook=ReadExcelData.class.getClassLoader().getResource("TestData.xlsx").getPath().replace("\\", File.separator);
 		try {
-			FileInputStream fis=new FileInputStream(workbook);
-			XSSFWorkbook wb=new XSSFWorkbook(fis);
+			fis=new FileInputStream(workbook);
+			wb=new XSSFWorkbook(fis);
 			sheet=wb.getSheet(sheetName);
 		}
 		catch(Exception e)
@@ -57,6 +61,12 @@ public class ReadExcelData {
 		}
 
 		return listOfHeaders;
+	}
+	
+	public void closeExcel() throws IOException
+	{	
+		wb.close();
+		fis.close();		
 	}
 
 }

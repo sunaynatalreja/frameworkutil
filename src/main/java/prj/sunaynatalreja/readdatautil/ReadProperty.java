@@ -40,7 +40,9 @@ public static ReadProperty getInstance()
 	{
 		InputStream fis=ReadProperty.class.getClassLoader().getResourceAsStream(filename);
 		prop.load(fis);
-		return prop.getProperty(key);
+		String propertyValue=prop.getProperty(key);
+		fis.close();
+		return propertyValue;
 	}
 
 }
