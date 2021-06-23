@@ -48,8 +48,15 @@ public class WebDriverFactory {
 	{
 
 		setCapabilities(browser,device,appPath);
+		if(device==null ||device.isEmpty())
+		{
 		driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
 		driver.manage().window().maximize();
+		}
+		else if(browser.equals("android"))
+		{
+			driver=new AndroidDriver<>(new URL(hubUrl),capabilities);
+		}
 		return driver;
 	}
 
@@ -91,6 +98,7 @@ public class WebDriverFactory {
 	private void setAndroidDeviceCapabilities(String device, String appPath) {
 		capabilities=new DesiredCapabilities();
 		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
+		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
 		capabilities.setCapability(MobileCapabilityType.APP, appPath);
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
 		capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
