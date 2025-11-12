@@ -1,11 +1,10 @@
 package prj.sunaynatalreja.jsonutil;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 import java.util.Map;
 import org.testng.Assert;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 
-import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 import prj.sunaynatalreja.logutil.Log;
 
 public class JSONUtil {

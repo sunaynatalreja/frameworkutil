@@ -3,14 +3,10 @@
  */
 package prj.sunaynatalreja.readdatautil;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.aventstack.extentreports.ExtentReports;
-
-import prj.sunaynatalreja.webdriverutil.browserutil.BrowserElementActions;
 
 /**
  * @author Sunayna Talreja

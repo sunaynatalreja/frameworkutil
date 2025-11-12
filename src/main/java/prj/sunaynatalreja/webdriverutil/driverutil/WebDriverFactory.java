@@ -5,23 +5,18 @@ package prj.sunaynatalreja.webdriverutil.driverutil;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.aventstack.extentreports.ExtentReports;
 
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
+import io.appium.java_client.android.options.UiAutomator2Options;
 
 /**
  * @author Sunayna Talreja
@@ -32,7 +27,6 @@ public class WebDriverFactory {
 
 	WebDriver driver=null;
 	DesiredCapabilities capabilities ;
-	private WebDriverFactory webDriverFactory;
 
 	/**
 	 * @author Sunayna Talreja
@@ -44,90 +38,37 @@ public class WebDriverFactory {
 	 * @return WebDriver instance of the browser provided
 	 * @throws MalformedURLException
 	 */
-	public synchronized WebDriver getDriver(String browser,String hubUrl, String device, String appPath) throws MalformedURLException 
-	{
+	@SuppressWarnings("deprecation")
+	public synchronized WebDriver getDriver(String browser, String hubUrl, String device, String appPath) throws MalformedURLException {
 
-		setCapabilities(browser,device,appPath);
-		if(device==null ||device.isEmpty())
-		{
-		driver=new RemoteWebDriver(new URL(hubUrl),capabilities);
-		driver.manage().window().maximize();
-		}
-		else if(browser.equals("android"))
-		{
-			driver=new AndroidDriver<>(new URL(hubUrl),capabilities);
-		}
-		return driver;
-	}
+        if (browser.equalsIgnoreCase("android")) {
+            UiAutomator2Options options = new UiAutomator2Options()
+                    .setDeviceName(device)
+                    .setPlatformName("Android")
+                    .setApp(appPath)
+                    .setAutoGrantPermissions(true)
+                    .setFullReset(true)
+                    .setNewCommandTimeout(Duration.ofSeconds(120));
+            
+            driver = new AndroidDriver(new URL(hubUrl), options);
+        } 
+        else if (browser.equalsIgnoreCase("chrome")) {
+            driver = new RemoteWebDriver(new URL(hubUrl), new ChromeOptions());
+            driver.manage().window().maximize();
+        } 
+        else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new RemoteWebDriver(new URL(hubUrl), new FirefoxOptions());
+            driver.manage().window().maximize();
+        } 
+        else if (browser.equalsIgnoreCase("internetexplorer")) {
+            InternetExplorerOptions ieOptions = new InternetExplorerOptions()
+                    .ignoreZoomSettings()
+                    .introduceFlakinessByIgnoringSecurityDomains();
+            driver = new RemoteWebDriver(new URL(hubUrl), ieOptions);
+            driver.manage().window().maximize();
+        }
 
-	private void setCapabilities(String browser,String device, String appPath) throws MalformedURLException
-	{
-		switch(browser) {
-		case "chrome":
-			setChromeCapabilities();
-			break;
-		case "firefox":
-			setFirefoxCapabilities();
-			break;
-		case "internetexplorer":
-			setInternetExplorerCapabilities();
-			break;
-		case "android":
-			setAndroidDeviceCapabilities(device, appPath);
-			break;
-		case "edge":
-			setEdgeCapabilities();
-			break;			
-		}
-
-
-	}
-
-	/**
-	 * Edge Browser Capabilities
-	 */
-	private void setEdgeCapabilities() {
-		capabilities=DesiredCapabilities.edge();
-	}
-
-	/**
-	 * Android device capabilities
-	 * @param device
-	 * @param appPath
-	 */
-	private void setAndroidDeviceCapabilities(String device, String appPath) {
-		capabilities=new DesiredCapabilities();
-		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
-		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-		capabilities.setCapability(MobileCapabilityType.APP, appPath);
-		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
-		capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-		capabilities.setCapability("autoDismissAlerts", true);
-		capabilities.setCapability("autoGrantPermissions", "true");
-		capabilities.setCapability("fullReset", true);
-	}
-
-	/**
-	 * Internet Explorer Capabilities
-	 */
-	private void setInternetExplorerCapabilities() {
-		capabilities=DesiredCapabilities.internetExplorer();
-		capabilities.setCapability("ignoreZoomSetting", true);
-		capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-	}
-
-	/**
-	 * Firefox Capabilities
-	 */
-	private void setFirefoxCapabilities() {
-		capabilities=DesiredCapabilities.firefox();
-	}
-
-	/**
-	 * Chrome Capabilities
-	 */
-	private void setChromeCapabilities() {
-		capabilities=DesiredCapabilities.chrome();
-	}
+        return driver;
+    }
 
 }

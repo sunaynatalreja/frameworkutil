@@ -7,26 +7,24 @@
 
 	<groupId>prj.sunaynatalreja.frameworkutil</groupId>
 	<artifactId>frameworkutil</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.4</version>
 
 	<name>frameworkutil</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<selenium-java.version>3.141.59</selenium-java.version>
-		<mitmproxy-java.version>2.0.1</mitmproxy-java.version>
+		<selenium-java.version>4.38.0</selenium-java.version>
+		<mitmproxy-java.version>2.0.2</mitmproxy-java.version>
 		<droiddriver.version>1.0.0-BETA1</droiddriver.version>
-		<java-client.version>7.4.1</java-client.version>
-		<log4j.version>1.2.17</log4j.version>
-		<testng.version>7.3.0</testng.version>
-		<poi-ooxml.version>4.1.2</poi-ooxml.version>
-		<rest-assured.version>2.9.0</rest-assured.version>
-		<mockito-all.version>1.10.19</mockito-all.version>
+		<java-client.version>10.0.0</java-client.version>
+		<log4j.version>2.25.2</log4j.version>
+		<testng.version>7.11.0</testng.version>
+		<poi-ooxml.version>5.4.1</poi-ooxml.version>
+		<rest-assured.version>5.5.6</rest-assured.version>
+		<mockito-all.version>5.20.0</mockito-all.version>
 	</properties>
 
 
@@ -58,8 +56,8 @@
 			<version>${java-client.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
@@ -73,13 +71,13 @@
 			<version>${poi-ooxml.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.jayway.restassured</groupId>
-			<artifactId>rest-assured</artifactId>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
 			<version>${rest-assured.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
 			<version>${mockito-all.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -98,48 +96,47 @@
 				defaults (may be moved to parent pom) -->
 			<plugins>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
-				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                </plugin>
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
+					<version>3.5.4</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.4.2</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
+					<version>3.1.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
+					<version>3.1.4</version>
 				</plugin>
 				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
+					<version>4.0.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.9.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.1.2</version>
+					<version>3.4.2</version>
 
 					<configuration>
 						<archive>
@@ -153,7 +150,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.3.1</version>
 
 					<executions>
 						<execution>

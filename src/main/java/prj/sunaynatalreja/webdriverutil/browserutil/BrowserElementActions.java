@@ -3,6 +3,8 @@
  */
 package prj.sunaynatalreja.webdriverutil.browserutil;
 
+import java.time.Duration;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +13,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import prj.sunaynatalreja.extentreportutil.ExtentReportUtil;
 
 /**
  * @author Sunayna Talreja
@@ -42,7 +42,7 @@ public class BrowserElementActions {
 	public  boolean waitForElement(WebDriver driver, WebElement element)
 	{
 		boolean statusOfElementToBeReturned=false;
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement waitElement = wait.until(ExpectedConditions.visibilityOf(element));
 		if (waitElement.isDisplayed() && waitElement.isEnabled()) {
 			statusOfElementToBeReturned = true;
@@ -93,7 +93,7 @@ public class BrowserElementActions {
 	 * @param driver
 	 */
 	public  void waitForPageLoad(WebDriver driver) {
-		WebDriverWait wait=new WebDriverWait(driver, 10);
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor) driver).executeScript(
